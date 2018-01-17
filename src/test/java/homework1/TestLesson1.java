@@ -12,10 +12,10 @@ import static org.testng.Assert.*;
 
 public class TestLesson1 {
 
-    WebDriver driver;
-    String Url = "https://jdi-framework.github.io/tests";
-    String login = "epam";
-    String password = "1234";
+    private WebDriver driver;
+    private String Url = "https://jdi-framework.github.io/tests";
+    private String login = "epam";
+    private String password = "1234";
 
     //Create a new testSite in a new Java class, specify testSite name in accordance with checking functionality
     @Test
@@ -32,19 +32,15 @@ public class TestLesson1 {
         assertEquals(driver.getTitle(), "Index Page");
 
         //3 Perform login
-        WebElement profileButton = driver.findElement(By.className("profile-photo"));
-        profileButton.click();
-        WebElement loginInput = driver.findElement(By.id("Login"));
-        loginInput.sendKeys(login);
-        WebElement passwordInput = driver.findElement(By.id("Password"));
-        passwordInput.sendKeys(password);
-        WebElement loginButton = driver.findElement(By.xpath("//*[@type = 'submit']"));
-        loginButton.click();
+        driver.findElement(By.className("profile-photo")).click();
+        driver.findElement(By.id("Login")).sendKeys(login);
+        driver.findElement(By.id("Password")).sendKeys(password);
+        driver.findElement(By.xpath("//*[@type = 'submit']")).click();
         WebElement logoutButton = driver.findElement(By.className("logout"));
         assertTrue(logoutButton.isDisplayed());
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        WebElement usernameButton = profileButton.findElement(By.xpath("//*[@class = 'profile-photo']/span"));
+        WebElement usernameButton = driver.findElement(By.xpath("//*[@class = 'profile-photo']/span"));
         assertEquals(usernameButton.getText(), "PITER CHAILOVSKII");
 
         //5 Assert that there are 4 images on the Home Page and they are displayed
