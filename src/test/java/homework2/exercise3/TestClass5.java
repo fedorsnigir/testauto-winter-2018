@@ -12,7 +12,7 @@ import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class TestClass {
+public class TestClass5 {
 
     private WebDriver driver;
     private String Url = "https://jdi-framework.github.io/tests";

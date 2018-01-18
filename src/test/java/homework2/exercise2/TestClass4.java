@@ -1,4 +1,4 @@
-package homework2.exercise1and2;
+package homework2.exercise2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,18 +14,9 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class TestClass3 {
+public class TestClass4 {
     private WebDriver driver;
     private String url = "https://jdi-framework.github.io/tests";
-
-    @DataProvider(name = "4 texts")
-    public Object[][] getDataForTest4Texts() {
-        return new Object[][]{{
-                "To include good practices and ideas from successful EPAM projec",
-                "To be flexible and customizable",
-                "To be multiplatform",
-                "Already have good base (about 20 internal and some external projects), wish to get more…"}};
-    }
 
     @BeforeClass(alwaysRun = true)
     public void openBrowser() {
@@ -49,11 +40,16 @@ public class TestClass3 {
     }
 
     //6 Assert that there are 4 texts on the Home Page and check them by getting texts
-    @Test(groups = {"Smoke", "Regression"}, dataProvider = "4 texts")
-    public void test4Texts(String[] texts) {
+    @Test(groups = {"Smoke", "Regression"})
+    public void test4Texts() {
         List<WebElement> homePageTexts = driver.findElements(By.className("benefit-txt"));
+        String[] expectedMainTexts = {
+                "To include good practices and ideas from successful EPAM projec",
+                "To be flexible and customizable",
+                "To be multiplatform",
+                "Already have good base (about 20 internal and some external projects), wish to get more…"};
         for (int i = 0; i < homePageTexts.size(); i++) {
-            assertEquals(homePageTexts.get(i).getText().replace("\n", " "), texts[i]);
+            assertEquals(homePageTexts.get(i).getText().replace("\n", " "), expectedMainTexts[i]);
         }
     }
 

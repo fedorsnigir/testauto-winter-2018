@@ -9,7 +9,7 @@
         </groups>
 
         <packages>
-            <package name="homework2"/>
+            <package name="homework2.exercise2"/>
         </packages>
 
     </test>

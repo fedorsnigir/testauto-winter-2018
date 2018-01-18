@@ -1,4 +1,4 @@
-package homework2.exercise1and2;
+package homework2.exercise2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +9,9 @@ import org.testng.annotations.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class TestClass2 {
+public class TestClass3 {
     private WebDriver driver;
-    private String Url = "https://jdi-framework.github.io/tests";
+    private String url = "https://jdi-framework.github.io/tests";
     private String login = "epam";
     private String password = "1234";
 
@@ -19,7 +19,7 @@ public class TestClass2 {
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(Url);
+        driver.get(url);
     }
 
     @AfterTest(alwaysRun = true)
