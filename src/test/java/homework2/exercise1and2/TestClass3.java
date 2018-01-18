@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -13,23 +16,22 @@ import static org.testng.Assert.assertTrue;
 
 public class TestClass3 {
     private WebDriver driver;
-    private String Url = "https://jdi-framework.github.io/tests";
+    private String url = "https://jdi-framework.github.io/tests";
 
     @DataProvider(name = "4 texts")
-    public Object[] getDataForPerimeter() {
+    public Object[][] getDataForTest4Texts() {
         return new Object[][]{{
                 "To include good practices and ideas from successful EPAM projec",
                 "To be flexible and customizable",
                 "To be multiplatform",
-                "Already have good base (about 20 internal and some external projects), wish to get more…"}
-        };
+                "Already have good base (about 20 internal and some external projects), wish to get more…"}};
     }
 
     @BeforeClass(alwaysRun = true)
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(Url);
+        driver.get(url);
     }
 
     @AfterClass(alwaysRun = true)
