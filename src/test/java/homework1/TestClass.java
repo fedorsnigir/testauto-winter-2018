@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class TestLesson1 {
+public class TestClass {
 
     private WebDriver driver;
     private String Url = "https://jdi-framework.github.io/tests";
