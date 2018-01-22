@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 public class TestClass {
 
     private WebDriver driver;
-    private String Url = "https://jdi-framework.github.io/tests";
+    private String url = "https://jdi-framework.github.io/tests";
     private String login = "epam";
     private String password = "1234";
 
@@ -24,7 +24,7 @@ public class TestClass {
         //1 Open test site by URL
         driver = new ChromeDriver();
         driver.manage().window().fullscreen();
-        driver.get(Url);
+        driver.get(url);
         WebElement logo = driver.findElement(By.xpath("//*[@id = 'epam_logo']"));
         assertTrue(logo.isDisplayed());
 
