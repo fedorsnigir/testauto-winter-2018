@@ -97,12 +97,22 @@ public class TestClass {
 
         //11 Select in dropdown
         differentElementsPage.selectDropdown(YELLOW);
-        sleep(3000);
+        differentElementsPage.checkChosenDropdown(YELLOW);
 
         //12 Check in logs section selected values and status (true|false)
+        differentElementsPage.checkLogs(WATER, true);
+        differentElementsPage.checkLogs(WIND, true);
+        differentElementsPage.checkLogs(SELEN);
+        differentElementsPage.checkLogs(YELLOW);
 
         //13 Unselect and assert checkboxes
+        differentElementsPage.unselectCheckbox(WATER);
+        differentElementsPage.unselectCheckbox(WIND);
+        differentElementsPage.checkUnselectedCheckbox(WATER);
+        differentElementsPage.checkUnselectedCheckbox(WIND);
 
         //14 Check in logs section unselected values and status (true|false)
+        differentElementsPage.checkLogs(WIND, false);
+        differentElementsPage.checkLogs(WIND, false);
     }
 }
