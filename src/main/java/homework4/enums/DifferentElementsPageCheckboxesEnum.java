@@ -5,5 +5,6 @@ public enum DifferentElementsPageCheckboxesEnum {
     WATER,
     EARTH,
     WIND,
-    FIRE,
+    FIRE,;
+
 }

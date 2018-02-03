@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static homework4.enums.ServiceMenusEnum.TOPMENU;
+import static homework4.enums.ServiceMenuOptionsEnum.DIFFERENT_ELEMENTS;
 
 public class IndexPage {
 
@@ -63,7 +63,6 @@ public class IndexPage {
                 $(".sub-menu").click();
                 break;
         }
-
     }
 
     public void checkServiceMenuOptions(ServiceMenusEnum menu, ServiceMenuOptionsEnum[] expectedServiceMenuOptionsEnum) {
@@ -77,31 +76,17 @@ public class IndexPage {
                 break;
         }
         for (int i = 0; i < serviceMenuOptions.size(); i++) {
-            serviceMenuOptions.get(i).shouldHave(text(expectedServiceMenuOptionsEnum[i].text));
+            serviceMenuOptions.get(i).shouldHave(text(expectedServiceMenuOptionsEnum[i].toString()));
         }
     }
 
-    public Object openServiceMenuOption(ServiceMenuOptionsEnum serviceMenuOption) {
-        switch (serviceMenuOption.text) {
-            case "SUPPORT":
-                $("[href*='page3']").click();
-                break;
-            case "DATES":
-                $("[href*='page4']").click();
-                break;
-            case "COMPLEX TABLE":
-                $("[href*='page5']").click();
-                break;
-            case "SIMPLE TABLE":
-                $("[href*='page6']").click();
-                break;
-            case "TABLE WITH PAGES":
-                $("[href*='page7']").click();
-                break;
-            case "DIFFERENT ELEMENTS":
-                $("[href*='page8']").click();
-                return new DifferentElementsPage();
+    public Object openDifferentsElementsPage() {
+        List<SelenideElement> options = $$(".dropdown li");
+        for (SelenideElement option : options) {
+            if (option.getText().equalsIgnoreCase(DIFFERENT_ELEMENTS.toString())){
+                option.click();
+            }
         }
-        return null;
+        return new DifferentElementsPage();
     }
 }

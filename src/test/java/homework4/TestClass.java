@@ -1,19 +1,21 @@
 package homework4;
 
 import com.codeborne.selenide.Configuration;
-import homework4.enums.*;
-import homework4.pageobjects.IndexPage;
+import homework4.enums.IndexPageMainTextsEnum;
+import homework4.enums.ServiceMenuOptionsEnum;
 import homework4.pageobjects.DifferentElementsPage;
+import homework4.pageobjects.IndexPage;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-import static com.codeborne.selenide.Selenide.*;
-import static homework4.enums.DifferentElementsPageCheckboxesEnum.*;
-import static homework4.enums.DifferentElementsPageDropdownEnum.*;
-import static homework4.enums.DifferentElementsPageRadiosEnum.*;
+import static com.codeborne.selenide.Selenide.close;
+import static com.codeborne.selenide.Selenide.open;
+import static homework4.enums.DifferentElementsPageCheckboxesEnum.WATER;
+import static homework4.enums.DifferentElementsPageCheckboxesEnum.WIND;
+import static homework4.enums.DifferentElementsPageDropdownEnum.YELLOW;
+import static homework4.enums.DifferentElementsPageRadiosEnum.SELEN;
 import static homework4.enums.IndexPageHomeTextEnum.HOME_TEXT;
 import static homework4.enums.IndexPageMainTitleEnum.TITLE;
 import static homework4.enums.ServiceMenusEnum.LEFTMENU;
@@ -75,8 +77,7 @@ public class TestClass {
 
         //7 Open through the header menu Service -> Different Elements Page
         indexPage.expandServiceMenu(TOPMENU);
-        differentElementsPage = (DifferentElementsPage)
-                indexPage.openServiceMenuOption(ServiceMenuOptionsEnum.DIFFERENT_ELEMENTS);
+        differentElementsPage = (DifferentElementsPage) indexPage.openDifferentsElementsPage();
 
         //8 Check interface on Service page, it contains all needed elements.
         differentElementsPage.checkCheckboxes();
@@ -86,10 +87,10 @@ public class TestClass {
         differentElementsPage.checkSections();
 
         //9 Select and assert checkboxes
-        differentElementsPage.selectCheckbox(WATER);
-        differentElementsPage.selectCheckbox(WIND);
-        differentElementsPage.checkSelectedCheckbox(WATER);
-        differentElementsPage.checkSelectedCheckbox(WIND);
+        differentElementsPage.selectCheckbox(WATER, true);
+        differentElementsPage.selectCheckbox(WIND, true);
+        differentElementsPage.checkSelectedCheckbox(WATER, true);
+        differentElementsPage.checkSelectedCheckbox(WIND, true);
 
         //10 Select radio
         differentElementsPage.selectRadio(SELEN);
@@ -106,13 +107,13 @@ public class TestClass {
         differentElementsPage.checkLogs(YELLOW);
 
         //13 Unselect and assert checkboxes
-        differentElementsPage.unselectCheckbox(WATER);
-        differentElementsPage.unselectCheckbox(WIND);
-        differentElementsPage.checkUnselectedCheckbox(WATER);
-        differentElementsPage.checkUnselectedCheckbox(WIND);
+        differentElementsPage.selectCheckbox(WATER, false);
+        differentElementsPage.selectCheckbox(WIND, false);
+        differentElementsPage.checkSelectedCheckbox(WATER, false);
+        differentElementsPage.checkSelectedCheckbox(WIND, false);
 
         //14 Check in logs section unselected values and status (true|false)
-        differentElementsPage.checkLogs(WIND, false);
+        differentElementsPage.checkLogs(WATER, false);
         differentElementsPage.checkLogs(WIND, false);
     }
 }

@@ -2,8 +2,14 @@ package homework4.enums;
 
 public enum DifferentElementsPageDropdownEnum {
 
-    RED,
-    GREEN,
-    BLUE,
-    YELLOW
+    RED("Red"),
+    GREEN("Green"),
+    BLUE("Blue"),
+    YELLOW("Yellow");
+
+    public String name;
+
+    DifferentElementsPageDropdownEnum(String name) {
+        this.name = name;
+    }
 }

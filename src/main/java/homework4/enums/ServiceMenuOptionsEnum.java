@@ -2,16 +2,18 @@ package homework4.enums;
 
 public enum ServiceMenuOptionsEnum {
 
-    SUPPORT("SUPPORT"),
-    DATES("DATES"),
-    COMPLEX_TABLE("COMPLEX TABLE"),
-    SIMPLE_TABLE("SIMPLE TABLE"),
-    TABLE_WITH_PAGES("TABLE WITH PAGES"),
-    DIFFERENT_ELEMENTS("DIFFERENT ELEMENTS");
+    SUPPORT,
+    DATES,
+    COMPLEX_TABLE,
+    SIMPLE_TABLE,
+    TABLE_WITH_PAGES,
+    DIFFERENT_ELEMENTS;
 
-    public String text;
+    ServiceMenuOptionsEnum() {
+    }
 
-    ServiceMenuOptionsEnum(String text) {
-        this.text = text;
+    @Override
+    public String toString() {
+        return name().replaceAll("_", " ");
     }
 }
