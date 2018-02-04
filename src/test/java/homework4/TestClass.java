@@ -77,7 +77,7 @@ public class TestClass {
 
         //7 Open through the header menu Service -> Different Elements Page
         indexPage.expandServiceMenu(TOPMENU);
-        differentElementsPage = (DifferentElementsPage) indexPage.openDifferentsElementsPage();
+        differentElementsPage = indexPage.openDifferentsElementsPage();
 
         //8 Check interface on Service page, it contains all needed elements.
         differentElementsPage.checkCheckboxes();

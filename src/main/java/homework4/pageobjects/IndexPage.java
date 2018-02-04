@@ -80,7 +80,7 @@ public class IndexPage {
         }
     }
 
-    public Object openDifferentsElementsPage() {
+    public DifferentElementsPage openDifferentsElementsPage() {
         List<SelenideElement> options = $$(".dropdown li");
         for (SelenideElement option : options) {
             if (option.getText().equalsIgnoreCase(DIFFERENT_ELEMENTS.toString())){
