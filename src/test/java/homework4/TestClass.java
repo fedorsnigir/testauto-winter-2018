@@ -1,17 +1,17 @@
 package homework4;
 
-import com.codeborne.selenide.Configuration;
+import homework3.enums.User;
 import homework4.enums.IndexPageMainTextsEnum;
 import homework4.enums.ServiceMenuOptionsEnum;
+import homework4.pageobjects.DatesPage;
 import homework4.pageobjects.DifferentElementsPage;
 import homework4.pageobjects.IndexPage;
+import homework4.utils.Configuration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.close;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static homework4.enums.DifferentElementsPageCheckboxesEnum.WATER;
 import static homework4.enums.DifferentElementsPageCheckboxesEnum.WIND;
 import static homework4.enums.DifferentElementsPageDropdownEnum.YELLOW;
@@ -20,26 +20,20 @@ import static homework4.enums.IndexPageHomeTextEnum.HOME_TEXT;
 import static homework4.enums.IndexPageMainTitleEnum.TITLE;
 import static homework4.enums.ServiceMenusEnum.LEFTMENU;
 import static homework4.enums.ServiceMenusEnum.TOPMENU;
+import static homework4.enums.SliderEnum.LEFT;
+import static homework4.enums.SliderEnum.RIGHT;
 
-public class TestClass {
+public class TestClass extends Configuration {
     private String url = "https://jdi-framework.github.io/tests";
-    private String login = "epam";
-    private String password = "1234";
-    private String username = "PITER CHAILOVSKII";
+
     private IndexPage indexPage;
     private DifferentElementsPage differentElementsPage;
+    private DatesPage datesPage;
 
     @BeforeClass
-    public void initializeBrowser() {
-        Configuration.browser = "CHROME";
-        Configuration.screenshots = true;
-        Configuration.reportsFolder = "build/reports/tests";
-    }
-
-    @BeforeMethod
     public void openSite() {
         open(url);
-        indexPage = new IndexPage();
+        indexPage = page(IndexPage.class);
     }
 
     @AfterClass
@@ -47,22 +41,21 @@ public class TestClass {
         close();
     }
 
-    //Create a new testSite in a new Java class, specify testSite name in accordance with checking functionality
     @Test
-    public void testSite() {
+    public void testCase1() {
 
         //1 Check open test site by URL
         indexPage.checkLogo();
 
         //2 Perform login
-        indexPage.performLogin(login, password);
+        indexPage.performLogin(User.LOGIN, User.PASSWORD);
         indexPage.checkLogin();
 
         //3 Assert User name in the left-top side of screen that user is loggined
-        indexPage.checkUsername(username);
+        indexPage.checkUsername(User.USERNAME);
 
         //4 Check interface on Home page, it contains all needed elements.
-        indexPage.checkMainImages();
+        indexPage.checkMainImages(4);
         indexPage.checkMainTexts(IndexPageMainTextsEnum.values());
         indexPage.checkMainTitle(TITLE);
         indexPage.checkHomeText(HOME_TEXT);
@@ -115,5 +108,50 @@ public class TestClass {
         //14 Check in logs section unselected values and status (true|false)
         differentElementsPage.checkLogs(WATER, false);
         differentElementsPage.checkLogs(WIND, false);
+    }
+
+    @Test
+    public void testCase2() {
+
+        //1 Check open test site by URL
+        indexPage.checkLogo();
+
+        //2 Perform login
+        indexPage.performLogin(User.LOGIN, User.PASSWORD);
+        indexPage.checkLogin();
+
+        //3 Assert User name in the left-top side of screen that user is loggined
+        indexPage.checkUsername(User.USERNAME);
+
+        //4 Open Service -> Dates
+        indexPage.expandServiceMenu(TOPMENU);
+        datesPage = indexPage.openDatesPage();
+        datesPage.checkPageIsOpened();
+
+        //--- Using drag-and-drop set Range sliders ---
+
+        //5 left sliders - the most left position, right moveSlider - the most rigth position
+        datesPage.moveSlider(LEFT, 0);
+        datesPage.moveSlider(RIGHT, 100);
+        datesPage.checkSlider(LEFT, 0);
+        datesPage.checkSlider(RIGHT, 100);
+
+        //6 left sliders - the most left position, right moveSlider - the most left position
+        datesPage.moveSlider(LEFT, 0);
+        datesPage.moveSlider(RIGHT, 0);
+        datesPage.checkSlider(LEFT, 0);
+        datesPage.checkSlider(RIGHT, 0);
+
+        //7 left sliders - the most rigth position, right moveSlider - the most rigth position
+        datesPage.moveSlider(RIGHT, 100);
+        datesPage.moveSlider(LEFT, 100);
+        datesPage.checkSlider(RIGHT, 100);
+        datesPage.checkSlider(LEFT, 100);
+
+        //8 left - 30, right - 70	Range is set. Check sliders values
+        datesPage.moveSlider(LEFT, 30);
+        datesPage.moveSlider(RIGHT, 70);
+        datesPage.checkSlider(LEFT, 30);
+        datesPage.checkSlider(RIGHT, 70);
     }
 }

@@ -1,5 +1,6 @@
 package homework3.pageobjects;
 
+import homework3.enums.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,10 +62,10 @@ public class IndexPage {
         assertEquals(driver.getTitle(), "Index Page");
     }
 
-    public void performLogin(String login, String password) {
+    public void performLogin(User login, User password) {
         profilePhoto.click();
-        loginInput.sendKeys(login);
-        passwordInput.sendKeys(password);
+        loginInput.sendKeys(login.value);
+        passwordInput.sendKeys(password.value);
         submitBtn.click();
     }
 
@@ -72,11 +73,12 @@ public class IndexPage {
         assertTrue(logoutButton.isDisplayed());
     }
 
-    public void checkUsername() {
-        assertEquals(usernameButton.getText(), "PITER CHAILOVSKII");
+    public void checkUsername(User username) {
+        assertEquals(usernameButton.getText(), username.value);
     }
 
-    public void checkMainImages() {
+    public void checkMainImages(int count) {
+        assertEquals(mainImages.size(),count);
         for (WebElement element : mainImages) {
             assertTrue(element.isDisplayed());
         }
@@ -95,5 +97,4 @@ public class IndexPage {
     public void checkHomeText(String expectedHomeText) {
         assertEquals(homeText.getText().replace("\n", " "), expectedHomeText);
     }
-
 }

@@ -1,6 +1,7 @@
 package homework4.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import homework3.enums.User;
 import homework4.enums.*;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.page;
+import static homework4.enums.ServiceMenuOptionsEnum.DATES;
 import static homework4.enums.ServiceMenuOptionsEnum.DIFFERENT_ELEMENTS;
 
 public class IndexPage {
@@ -17,10 +20,10 @@ public class IndexPage {
         $(".epam-logo").shouldBe(visible);
     }
 
-    public void performLogin(String login, String password) {
+    public void performLogin(User login, User password) {
         $(".profile-photo").click();
-        $("#Login").setValue(login);
-        $("#Password").setValue(password);
+        $("#Login").setValue(login.value);
+        $("#Password").setValue(password.value);
         $("[type = submit]").click();
     }
 
@@ -28,12 +31,12 @@ public class IndexPage {
         $(".logout").shouldBe(visible);
     }
 
-    public void checkUsername(String username) {
-        $(".profile-photo > span").shouldHave(text(username));
+    public void checkUsername(User username) {
+        $(".profile-photo > span").shouldHave(text(username.value));
     }
 
-    public void checkMainImages() {
-        List<SelenideElement> mainImages = $$(".benefit-icon");
+    public void checkMainImages(int count) {
+        List<SelenideElement> mainImages = $$(".benefit-icon").shouldHaveSize(count);
         for (SelenideElement element : mainImages) {
             element.shouldBe(visible);
         }
@@ -87,6 +90,16 @@ public class IndexPage {
                 option.click();
             }
         }
-        return new DifferentElementsPage();
+        return page(DifferentElementsPage.class);
+    }
+
+    public DatesPage openDatesPage() {
+        List<SelenideElement> options = $$(".dropdown li");
+        for (SelenideElement option : options) {
+            if (option.getText().equalsIgnoreCase(DATES.toString())){
+                option.click();
+            }
+        }
+        return page(DatesPage.class);
     }
 }
