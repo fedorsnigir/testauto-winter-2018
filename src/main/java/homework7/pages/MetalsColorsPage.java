@@ -54,6 +54,7 @@ public class MetalsColorsPage extends CommonPage {
         elements.select(element);
     }
 
+    // TODO actually, this method do not `clear` anything...
     public void clearVegetables() {
         vegetables.select("Salad");
     }
@@ -76,6 +77,8 @@ public class MetalsColorsPage extends CommonPage {
         submit.click();
     }
 
+    // TODO a `bit` weird approach.
+    // TODO refactor your code with Entity Driving Testing approach, it will help...
     public <T> void checkLogs(T... option) {
         String[] logs = logsSection.getLines();
         if (option[0] instanceof Integer) {
@@ -84,6 +87,7 @@ public class MetalsColorsPage extends CommonPage {
                 sum += (Integer) option[i];
             }
             for (String line : logs) {
+                // TODO what's happened in case if `false` ?
                 if (line.contains("Summary")) {
                     Assert.isTrue(line.contains(String.valueOf(sum)));
                 }
