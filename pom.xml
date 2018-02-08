@@ -39,11 +39,11 @@
             <version>LATEST</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.epam.jdi</groupId>-->
-            <!--<artifactId>jdi-uitest-web</artifactId>-->
-            <!--<version>1.0.93</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-uitest-web</artifactId>
+            <version>1.0.93</version>
+        </dependency>
     </dependencies>
 
 </project>
