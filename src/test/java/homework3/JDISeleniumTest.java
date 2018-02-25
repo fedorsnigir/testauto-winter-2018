@@ -1,23 +1,26 @@
 package homework3;
 
+import homework3.enums.IndexPageMainTextsEnum;
 import homework3.pageobjects.IndexPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
+import static homework3.enums.IndexPageHomeTextEnum.HOME_TEXT;
+import static homework3.enums.IndexPageMainTitleEnum.TITLE;
 import static homework3.enums.User.*;
 
-public class TestClass {
+public class JDISeleniumTest {
 
-    private String url = "https://jdi-framework.github.io/tests";
     private WebDriver driver;
     private IndexPage indexPage;
 
     @BeforeClass
-    public void initializeBrowser() {
+    public void initialize() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(url);
         indexPage = new IndexPage(driver);
     }
 
@@ -32,14 +35,15 @@ public class TestClass {
     @Test
     public void testSite() {
 
-        //1 Check open test site by URL
+        //1 Check openPage test site by URL
+        indexPage.openPage();
         indexPage.checkLogo();
 
         //2 Assert Browser title
         indexPage.checkTitle();
 
         //3 Perform login
-        indexPage.performLogin(LOGIN, PASSWORD);
+        indexPage.login(LOGIN, PASSWORD);
         indexPage.checkLogin();
 
         //4 Assert User name in the left-top side of screen that user is loggined
@@ -49,21 +53,10 @@ public class TestClass {
         indexPage.checkMainImages(4);
 
         //6 Assert that there are 4 texts on the Home Page and check them by getting texts
-        String[] expectedMainTexts = {
-                "To include good practices and ideas from successful EPAM projec",
-                "To be flexible and customizable",
-                "To be multiplatform",
-                "Already have good base (about 20 internal and some external projects), wish to get more…"};
-        indexPage.checkMainTexts(expectedMainTexts);
+        indexPage.checkMainTexts(IndexPageMainTextsEnum.values());
 
         //7 Assert that there are the main header and the text below it on the Home Page
-        String expectedMainTitle = "EPAM FRAMEWORK WISHES…";
-        indexPage.checkMainTitle(expectedMainTitle);
-
-        String expectedHomeText = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR " +
-                "INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION " +
-                "ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN " +
-                "VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.";
-        indexPage.checkHomeText(expectedHomeText);
+        indexPage.checkMainTitle(TITLE);
+        indexPage.checkHomeText(HOME_TEXT);
     }
 }

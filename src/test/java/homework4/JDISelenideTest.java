@@ -8,6 +8,7 @@ import homework4.pageobjects.DifferentElementsPage;
 import homework4.pageobjects.IndexPage;
 import homework4.utils.Configuration;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,16 +24,14 @@ import static homework4.enums.ServiceMenusEnum.TOPMENU;
 import static homework4.enums.SliderEnum.LEFT;
 import static homework4.enums.SliderEnum.RIGHT;
 
-public class TestClass extends Configuration {
-    private String url = "https://jdi-framework.github.io/tests";
+public class JDISelenideTest extends Configuration {
 
     private IndexPage indexPage;
     private DifferentElementsPage differentElementsPage;
     private DatesPage datesPage;
 
     @BeforeClass
-    public void openSite() {
-        open(url);
+    public void initialize() {
         indexPage = page(IndexPage.class);
     }
 
@@ -41,14 +40,20 @@ public class TestClass extends Configuration {
         close();
     }
 
-    @Test
-    public void testCase1() {
+    @AfterMethod
+    public void performLogout() {
+        indexPage.logout();
+    }
 
-        //1 Check open test site by URL
+    @Test
+    public void testDifferentElementsPage() {
+
+        //1 Check openPage test site by URL
+        indexPage.openPage();
         indexPage.checkLogo();
 
         //2 Perform login
-        indexPage.performLogin(User.LOGIN, User.PASSWORD);
+        indexPage.login(User.LOGIN, User.PASSWORD);
         indexPage.checkLogin();
 
         //3 Assert User name in the left-top side of screen that user is loggined
@@ -111,13 +116,14 @@ public class TestClass extends Configuration {
     }
 
     @Test
-    public void testCase2() {
+    public void testDatesPage() {
 
-        //1 Check open test site by URL
+        //1 Check openPage test site by URL
+        indexPage.openPage();
         indexPage.checkLogo();
 
         //2 Perform login
-        indexPage.performLogin(User.LOGIN, User.PASSWORD);
+        indexPage.login(User.LOGIN, User.PASSWORD);
         indexPage.checkLogin();
 
         //3 Assert User name in the left-top side of screen that user is loggined

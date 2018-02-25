@@ -8,19 +8,23 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.*;
 import static homework4.enums.ServiceMenuOptionsEnum.DATES;
 import static homework4.enums.ServiceMenuOptionsEnum.DIFFERENT_ELEMENTS;
 
 public class IndexPage {
 
+    private String url = "https://jdi-framework.github.io/tests";
+
+    public void openPage() {
+        open(url);
+    }
+
     public void checkLogo() {
         $(".epam-logo").shouldBe(visible);
     }
 
-    public void performLogin(User login, User password) {
+    public void login(User login, User password) {
         $(".profile-photo").click();
         $("#Login").setValue(login.value);
         $("#Password").setValue(password.value);
@@ -28,7 +32,7 @@ public class IndexPage {
     }
 
     public void checkLogin() {
-        $(".logout").shouldBe(visible);
+        $("[class = logout]").shouldBe(visible);
     }
 
     public void checkUsername(User username) {
@@ -101,5 +105,10 @@ public class IndexPage {
             }
         }
         return page(DatesPage.class);
+    }
+
+    public void logout() {
+        $(".profile-photo").click();
+        $("[class = logout]").click();
     }
 }

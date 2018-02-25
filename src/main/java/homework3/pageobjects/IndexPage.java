@@ -1,5 +1,8 @@
 package homework3.pageobjects;
 
+import homework3.enums.IndexPageHomeTextEnum;
+import homework3.enums.IndexPageMainTextsEnum;
+import homework3.enums.IndexPageMainTitleEnum;
 import homework3.enums.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class IndexPage {
 
     private WebDriver driver;
+    private String url = "https://jdi-framework.github.io/tests";
 
     public IndexPage(WebDriver driver) {
         this.driver = driver;
@@ -53,6 +57,9 @@ public class IndexPage {
     @FindBy(xpath = "//*[contains(@class,'main-txt')]")
     private WebElement homeText;
 
+    public void openPage() {
+        driver.get(url);
+    }
 
     public void checkLogo() {
         assertTrue(logo.isDisplayed());
@@ -62,7 +69,7 @@ public class IndexPage {
         assertEquals(driver.getTitle(), "Index Page");
     }
 
-    public void performLogin(User login, User password) {
+    public void login(User login, User password) {
         profilePhoto.click();
         loginInput.sendKeys(login.value);
         passwordInput.sendKeys(password.value);
@@ -78,23 +85,23 @@ public class IndexPage {
     }
 
     public void checkMainImages(int count) {
-        assertEquals(mainImages.size(),count);
+        assertEquals(mainImages.size(), count);
         for (WebElement element : mainImages) {
             assertTrue(element.isDisplayed());
         }
     }
 
-    public void checkMainTexts(String[] expectedMainTexts) {
+    public void checkMainTexts(IndexPageMainTextsEnum[] expectedMainTexts) {
         for (int i = 0; i < mainTexts.size(); i++) {
-            assertEquals(mainTexts.get(i).getText().replace("\n", " "), expectedMainTexts[i]);
+            assertEquals(mainTexts.get(i).getText().replace("\n", " "), expectedMainTexts[i].text);
         }
     }
 
-    public void checkMainTitle(String expectedMainTitle) {
-        assertEquals(mainTitle.getText(), expectedMainTitle);
+    public void checkMainTitle(IndexPageMainTitleEnum expectedMainTitle) {
+        assertEquals(mainTitle.getText(), expectedMainTitle.text);
     }
 
-    public void checkHomeText(String expectedHomeText) {
-        assertEquals(homeText.getText().replace("\n", " "), expectedHomeText);
+    public void checkHomeText(IndexPageHomeTextEnum expectedHomeText) {
+        assertEquals(homeText.getText().replace("\n", " "), expectedHomeText.text);
     }
 }
