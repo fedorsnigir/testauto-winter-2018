@@ -19,9 +19,11 @@ import static homework7.enums.MetalsAndColors.VegetablesEnum.TOMATO;
 
 public class TestClass extends TestNGBase {
 
+    // TODO this should not be here, take a look 'entity driving testing'
     private String login = "epam";
     private String password = "1234";
     private String username = "PITER CHAILOVSKII";
+    // !TODO
 
     @BeforeSuite(alwaysRun = true)
     public void initialize() {
@@ -35,16 +37,25 @@ public class TestClass extends TestNGBase {
         homePage.open();
 
         //1 Login on JDI site as User
+        // TODO NO ! All information about user has to be encapsulated in User class !!
         login(new User(login, password));
         homePage.checkUsername(username);
 
         //2 Open Metals & Colors page by Header menu
+        // TODO this method will not work in case if we try to open sub-menu (Date, for example)
         homePage.header.menu.select(METALS_COLORS);
         metalsColorsPage.checkOpened();
 
         //3 Fill form Metals & Colors by data
+        // TODO awful hardcode !
         int firstRadioButton = 3;
         int secondRadioButton = 8;
+        // !TODO
+
+        // TODO #1 Basically, you should create a Class that contains all needed information,
+        // TODO like loginForm and user
+        // TODO #2 From my point of view, all of this elements linked to eachother, right ?
+        // TODO It should be grouped in smth...
         metalsColorsPage.selectRadioButton(firstRadioButton, secondRadioButton);
         metalsColorsPage.selectCheckbox(WATER);
         metalsColorsPage.selectCheckbox(WIND);
@@ -56,7 +67,9 @@ public class TestClass extends TestNGBase {
 
         //4 Submit form Metals & Colors
         metalsColorsPage.submit();
+        // !TODO
 
+        // TODO the same problem. Do you have any chance to take a look on JDI presentation in the first place ?
         //5 Result sections should contains data below:
         metalsColorsPage.checkLogs(firstRadioButton, secondRadioButton);
         metalsColorsPage.checkLogs(WATER);
