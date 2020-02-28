@@ -4,9 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>testauto-winter-2018</groupId>
-    <artifactId>testauto-winter-2018</artifactId>
+    <groupId>fedorsnigir_jditests</groupId>
+    <artifactId>fedorsnigir_jditests</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <aspectj.version>1.8.5</aspectj.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <suiteXmlFile>testNG.xml</suiteXmlFile>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -22,28 +31,28 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>LATEST</version>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>LATEST</version>
+            <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-            <version>LATEST</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
         </dependency>
 
         <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-uitest-web</artifactId>
-            <version>1.0.93</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
-
 </project>
